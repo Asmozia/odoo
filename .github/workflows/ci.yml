@@ -18,7 +18,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js" --stop-agents-after="build"
+      - run: npx nx-cloud start-ci-run --distribute-on="5 linux-medium-js"
 
       # Cache node_modules
       - uses: actions/setup-node@v3
