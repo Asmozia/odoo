@@ -1,11 +1,11 @@
 {
-  "name": "@asmozia/odoo-api",
+  "name": "odoo-api",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/odoo-api/src",
   "projectType": "library",
   "targets": {
     "build": {
-      "executor": "@nx/js:tsc",
+      "executor": "@nx/vite:build",
       "outputs": ["{options.outputPath}"],
       "options": {
         "outputPath": "dist/packages/odoo-api",
@@ -15,7 +15,7 @@
       }
     },
     "publish": {
-      "command": "node tools/scripts/publish.mjs @asmozia/odoo-api {args.ver} {args.tag}",
+      "command": "node tools/scripts/publish.mjs odoo-api {args.ver} {args.tag}",
       "dependsOn": ["build"]
     }
   },
