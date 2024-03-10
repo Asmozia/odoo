@@ -1,6 +1,6 @@
 {
   "name": "@asmozia/react-odoo",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "main": "./index.js",
   "types": "./index.d.ts",
   "exports": {
