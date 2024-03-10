@@ -19,6 +19,13 @@
       "inputs": ["production", "^production"]
     }
   },
+  "release": {
+    "changelog": {
+      "workspaceChangelog": {
+        "createRelease": "github"
+      }
+    }
+  },
   "plugins": [
     {
       "plugin": "@nx/vite/plugin",
@@ -40,7 +47,18 @@
   "generators": {
     "@nx/react": {
       "library": {
+        "style": "styled-components",
+        "linter": "eslint",
         "unitTestRunner": "vitest"
+      },
+      "application": {
+        "babel": true,
+        "style": "styled-components",
+        "linter": "eslint",
+        "bundler": "vite"
+      },
+      "component": {
+        "style": "styled-components"
       }
     }
   }
