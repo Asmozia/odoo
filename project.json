@@ -1,5 +1,5 @@
 {
-  "name": "@odoo/source",
+  "name": "@odoo",
   "$schema": "node_modules/nx/schemas/project-schema.json",
   "targets": {
     "local-registry": {
