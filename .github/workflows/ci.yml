@@ -30,7 +30,7 @@ jobs:
       #      - name: Run Tests
       #        run: pnpm run test:ci
       - name: Build packages
-        run: nx run-many --targets=build
+        run: pnpm nx run-many --targets=build
       - name: Publish
         working-directory: ./dist
         run: pnpm publish
