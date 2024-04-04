@@ -1,0 +1,8 @@
+{
+  "name": "react-hook-example",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "examples/react-hook-example/src",
+  "projectType": "application",
+  "targets": {},
+  "tags": []
+}

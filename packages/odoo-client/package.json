@@ -1,5 +1,5 @@
 {
-  "name": "@asmozia/odoo-api",
+  "name": "odoo-client",
   "version": "0.4.0",
   "dependencies": {},
   "main": "./index.js",

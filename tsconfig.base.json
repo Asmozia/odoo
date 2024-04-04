@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@asmozia/odoo-api": ["packages/odoo-api/src/index.ts"],
+      "@asmozia/odoo-client": ["packages/odoo-client/src/index.ts"],
       "@asmozia/react-odoo": ["packages/react-odoo/src/index.ts"]
     }
   },

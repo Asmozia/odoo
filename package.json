@@ -10,7 +10,8 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "cipublish": "node tools/scripts/publish.mjs"
+    "cipublish": "node tools/scripts/publish.mjs",
+    "test": "vitest"
   },
   "devDependencies": {
     "@babel/core": "^7.14.5",

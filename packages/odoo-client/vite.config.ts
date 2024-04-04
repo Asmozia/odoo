@@ -6,7 +6,7 @@ import { nxViteTsPaths } from '@nx/vite/plugins/nx-tsconfig-paths.plugin';
 
 export default defineConfig({
   root: __dirname,
-  cacheDir: '../../node_modules/.vite/packages/odoo-api',
+  cacheDir: '../../node_modules/.vite/packages/odoo-client',
 
   plugins: [
     nxViteTsPaths(),
@@ -25,7 +25,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/packages/odoo-api',
+    outDir: '../../dist/packages/odoo-client',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
@@ -33,7 +33,7 @@ export default defineConfig({
     lib: {
       // Could also be a dictionary or array of multiple entry points.
       entry: 'src/index.ts',
-      name: 'odoo-api',
+      name: 'odoo-client',
       fileName: 'index',
       // Change this to the formats you want to support.
       // Don't forget to update your package.json as well.
@@ -55,7 +55,7 @@ export default defineConfig({
 
     reporters: ['default'],
     coverage: {
-      reportsDirectory: '../../coverage/packages/odoo-api',
+      reportsDirectory: '../../coverage/packages/odoo-client',
       provider: 'v8',
     },
   },
