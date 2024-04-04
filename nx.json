@@ -11,7 +11,7 @@
     ],
     "sharedGlobals": []
   },
-  "nxCloudAccessToken": "YWEzZGQ1YjMtNzcwZS00YzY3LWJlZjEtNzIyYjAxZmM5YmM3fHJlYWQtd3JpdGU=",
+  "nxCloudAccessToken": "OTZjYjViMzMtMzA5Yy00M2EzLTlkYzktZmE4ZjdmN2VhOTNhfHJlYWQtd3JpdGU=",
   "targetDefaults": {
     "@nx/vite:build": {
       "cache": true,
