@@ -8,7 +8,6 @@
   "namespace": "@asmozia",
   "packageManager": "pnpm@8.15.4",
   "license": "MIT",
-  "private": true,
   "scripts": {
     "cipublish": "node tools/scripts/publish.mjs",
     "test": "vitest"
