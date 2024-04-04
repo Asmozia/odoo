@@ -15,5 +15,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Asmozia/odoo.git"
+  },
+  "dependencies": {
+    "@asmozia/odoo-client": "0.5.0"
   }
 }
