@@ -27,8 +27,10 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --prefer-offline
-#      - name: Run Tests
-#        run: pnpm run test:ci
+      #      - name: Run Tests
+      #        run: pnpm run test:ci
+      - name: Build packages
+        run: nx run-many --targets=build
       - name: Publish
         working-directory: ./dist
         run: pnpm publish
