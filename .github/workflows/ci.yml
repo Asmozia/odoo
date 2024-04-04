@@ -31,8 +31,9 @@ jobs:
       #        run: pnpm run test:ci
       - name: Build packages
         run: pnpm nx run-many --targets=build
-      - name: Publish
-        working-directory: ./dist
-        run: pnpm publish
+      - name: Publish packages
+        run: npx nx release publish
+        shell: bash
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NPM_CONFIG_PROVENANCE: true
