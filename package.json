@@ -64,6 +64,6 @@
     "includedScripts": []
   },
   "publishConfig": {
-    "provenance": true
+    "access": "public"
   }
 }
