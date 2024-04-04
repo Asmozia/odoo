@@ -30,6 +30,7 @@ jobs:
 #      - name: Run Tests
 #        run: pnpm run test:ci
       - name: Publish
+        working-directory: ./dist
         run: pnpm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
