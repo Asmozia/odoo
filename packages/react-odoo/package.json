@@ -1,6 +1,6 @@
 {
   "name": "@asmozia/react-odoo",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "main": "dist/packages/react-odoo/index.js",
   "module": "dist/packages/react-odoo/index.mjs",
   "typings": "dist/packages/react-odoo/index.d.ts",
