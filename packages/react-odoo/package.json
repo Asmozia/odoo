@@ -1,19 +1,17 @@
 {
   "name": "@asmozia/react-odoo",
   "version": "0.7.0",
-  "main": "./index.js",
-  "types": "./index.d.ts",
-  "exports": {
-    ".": {
-      "import": "./index.mjs",
-      "require": "./index.js"
-    }
-  },
+  "main": "dist/packages/react-odoo/index.js",
+  "module": "dist/packages/react-odoo/index.mjs",
+  "typings": "dist/packages/react-odoo/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/Asmozia/odoo.git"
+  },
+  "dependencies": {
+    "@asmozia/odoo-client": "0.5.0"
   }
 }
