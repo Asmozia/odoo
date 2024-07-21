@@ -24,11 +24,11 @@ jobs:
           cache: npm
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: npm install --frozen-lockfile --prefer-offline
+        run: npx install --frozen-lockfile --prefer-offline
       #      - name: Run Tests
       #        run: npm run test:ci
       - name: Build packages
-        run: npm nx run-many --targets=build
+        run: npx nx run-many --targets=build
       - name: Publish packages
         run: npx nx release publish
         shell: bash
