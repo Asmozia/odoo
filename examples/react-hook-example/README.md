@@ -13,7 +13,7 @@ The `SampleUI.tsx` file contains styled components used for the layout of the ap
 To use this example, follow these steps:
 
 1. Clone the repository.
-3. Install the dependencies with `pnpm install`.
+3. Install the dependencies with `npm install`.
 4. Start the application with `nx run react-hook-example:serve`.
 
 ## Components

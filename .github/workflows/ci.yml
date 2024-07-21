@@ -18,20 +18,17 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: pnpm
+          cache: npm
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --prefer-offline
+        run: npm install --frozen-lockfile --prefer-offline
       #      - name: Run Tests
-      #        run: pnpm run test:ci
+      #        run: npm run test:ci
       - name: Build packages
-        run: pnpm nx run-many --targets=build
+        run: npm nx run-many --targets=build
       - name: Publish packages
         run: npx nx release publish
         shell: bash

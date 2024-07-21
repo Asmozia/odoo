@@ -7,7 +7,7 @@ This is a library for interacting with the Odoo API. It was generated with [Nx](
 Use the package manager [npm](https://www.npmjs.com/) to install odoo-client.
 
 ```bash
-pnpm install odoo-client
+npm install odoo-client
 ```
 
 ## Usage
