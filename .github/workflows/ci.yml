@@ -28,7 +28,7 @@ jobs:
       #      - name: Run Tests
       #        run: npm run test:ci
       - name: Build packages
-        run: npm nx run-many --targets=build
+        run: npx nx run-many --targets=build
       - name: Publish packages
         run: npx nx release publish
         shell: bash
