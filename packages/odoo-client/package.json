@@ -1,6 +1,6 @@
 {
   "name": "@asmozia/odoo-client",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "dependencies": {},
   "main": "dist/packages/react-odoo/index.js",
   "module": "dist/packages/react-odoo/index.mjs",
