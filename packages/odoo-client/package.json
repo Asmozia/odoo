@@ -2,9 +2,9 @@
   "name": "@asmozia/odoo-client",
   "version": "0.13.0",
   "type": "module",
-  "types": "dist/packages/odoo-client/index.d.ts",
-  "main": "dist/packages/odoo-client/index.mjs",
-  "module": "dist/packages/odoo-client/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "module": "dist/index.js",
   "dependencies": {},
   "publishConfig": {
     "access": "public"

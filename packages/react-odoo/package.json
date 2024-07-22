@@ -2,9 +2,9 @@
   "name": "@asmozia/react-odoo",
   "version": "0.13.0",
   "type": "module",
-  "types": "dist/packages/react-odoo/index.d.ts",
-  "main": "dist/packages/react-odoo/index.mjs",
-  "module": "dist/packages/react-odoo/index.js",
+  "types": "dist/index.d.ts",
+  "main": "dist/index.mjs",
+  "module": "dist/index.js",
   "publishConfig": {
     "access": "public"
   },
