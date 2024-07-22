@@ -4,10 +4,5 @@
   "sourceRoot": "packages/react-odoo/src",
   "projectType": "library",
   "tags": [],
-  "targets": {},
-  "nx-release-publish": {
-    "options": {
-      "packageRoot": "dist/packages/react-odoo"
-    }
-  }
+  "targets": {}
 }
