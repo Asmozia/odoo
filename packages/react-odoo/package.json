@@ -14,7 +14,7 @@
     "directory": "packages/react-odoo"
   },
   "files": [
-    "../../dist/packages/react-odoo",
+    "dist",
     "src"
   ],
   "dependencies": {

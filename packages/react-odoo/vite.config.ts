@@ -27,7 +27,7 @@ export default defineConfig({
   // Configuration for building your library.
   // See: https://vitejs.dev/guide/build.html#library-mode
   build: {
-    outDir: '../../dist/packages/react-odoo',
+    outDir: 'dist',
     reportCompressedSize: true,
     commonjsOptions: {
       transformMixedEsModules: true,
