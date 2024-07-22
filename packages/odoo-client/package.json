@@ -1,6 +1,6 @@
 {
   "name": "@asmozia/odoo-client",
-  "version": "0.11.0",
+  "version": "0.12.0",
   "type": "module",
   "types": "dist/packages/odoo-client/index.d.ts",
   "main": "dist/packages/odoo-client/index.mjs",
