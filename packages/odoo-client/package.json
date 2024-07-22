@@ -1,18 +1,21 @@
 {
   "name": "@asmozia/odoo-client",
   "version": "0.9.0",
+  "type": "module",
+  "types": "dist/packages/odoo-client/index.d.ts",
+  "main": "dist/packages/odoo-client/index.mjs",
+  "module": "dist/packages/odoo-client/index.js",
   "dependencies": {},
-  "main": "dist/packages/odoo-client/index.js",
-  "module": "dist/packages/odoo-client/index.mjs",
-  "typings": "dist/packages/odoo-client/index.d.ts",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Asmozia/odoo.git"
+    "url": "https://github.com/Asmozia/odoo.git",
+    "directory": "packages/odoo-client"
   },
   "files": [
-    "dist"
+    "dist",
+    "src"
   ]
 }
