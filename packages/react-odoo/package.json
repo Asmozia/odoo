@@ -18,6 +18,6 @@
     "src"
   ],
   "dependencies": {
-    "@asmozia/odoo-client": "0.14.0"
+    "@asmozia/odoo-client": "0.15.0"
   }
 }
