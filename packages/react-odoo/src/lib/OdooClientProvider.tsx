@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { OdooClient } from '@asmozia/odoo-client';
 
 export const OdooClientContext = React.createContext<OdooClient | undefined>(
   undefined
 );
 
-export const useOdooClient = (odooClient?: OdooClient) => {
+export const useOdooClient = () => {
   const client = React.useContext(OdooClientContext);
-
-  if (odooClient) {
-    return odooClient;
-  }
 
   if (!client) {
     throw new Error('No OdooClient set, use OdooClientProvider to set one');
@@ -27,7 +23,7 @@ export type OdooClientProviderProps = {
 export const OdooClientProvider = ({
   client,
   children,
-}: OdooClientProviderProps): JSX.Element => {
+}: OdooClientProviderProps): ReactNode => {
   return (
     <OdooClientContext.Provider value={client}>
       {children}
