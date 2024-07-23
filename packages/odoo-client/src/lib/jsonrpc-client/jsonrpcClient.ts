@@ -59,7 +59,7 @@ class JsonrpcClient {
       throw new Error(response.error.message || 'Unknown error');
     }
 
-    return response.result || response;
+    return response.result !== undefined ? response.result : response;
   }
 
   async send(url: URL, data: object, headers: HeadersInit): Promise<object> {
