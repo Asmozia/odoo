@@ -1,1 +1,1 @@
-export * from './lib/odoo-client/odooClient';
+export * from './lib/odooClient';

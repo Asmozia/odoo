@@ -2,7 +2,7 @@ import {
   JsonrpcClient,
   JsonrpcConfig,
   onSend,
-} from '../jsonrpc-client/jsonrpcClient';
+} from './jsonrpc-client/jsonrpcClient';
 
 interface OdooClientConfig extends JsonrpcConfig {
   dbName: string;

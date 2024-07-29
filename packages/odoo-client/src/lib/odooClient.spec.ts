@@ -1,5 +1,5 @@
 import { describe, test, expect, beforeEach, vi } from 'vitest';
-import { OdooClient, OdooClientConfig } from './odoo-client';
+import { OdooClient, OdooClientConfig } from './odooClient';
 
 // Mock fetch function
 vi.stubGlobal(
@@ -22,9 +22,9 @@ describe('odoo-client', () => {
   });
 
   test('execute common method', () => {
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    OdooClient.common('method', 'param');
+    odooClient.common('method', 'param');
 
     const expectedData = {
       jsonrpc: '2.0',
@@ -50,9 +50,9 @@ describe('odoo-client', () => {
   });
 
   test('execute version method', () => {
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    OdooClient.version();
+    odooClient.version();
 
     const expectedData = {
       jsonrpc: '2.0',
@@ -78,9 +78,9 @@ describe('odoo-client', () => {
   });
 
   test('execute authenticate method', () => {
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    OdooClient.authenticate(username, password);
+    odooClient.authenticate(username, password);
 
     const expectedData = {
       jsonrpc: '2.0',
@@ -107,12 +107,12 @@ describe('odoo-client', () => {
 
   test('execute object method', async () => {
     const uid = 1;
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    vi.spyOn(OdooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
+    vi.spyOn(odooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
 
-    await OdooClient.authenticate(username, password);
-    OdooClient.object('method', 'param');
+    await odooClient.authenticate(username, password);
+    odooClient.object('method', 'param');
 
     const expectedData = {
       jsonrpc: '2.0',
@@ -139,12 +139,12 @@ describe('odoo-client', () => {
 
   test('execute execute method', async () => {
     const uid = 1;
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    vi.spyOn(OdooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
+    vi.spyOn(odooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
 
-    await OdooClient.authenticate(username, password);
-    OdooClient.execute('my.model', 'read', ['param'], {
+    await odooClient.authenticate(username, password);
+    odooClient.execute('my.model', 'read', ['param'], {
       filter1: 'value1',
       filter2: 'value2',
     });
@@ -182,12 +182,12 @@ describe('odoo-client', () => {
 
   test('execute read method', async () => {
     const uid = 1;
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    vi.spyOn(OdooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
+    vi.spyOn(odooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
 
-    await OdooClient.authenticate(username, password);
-    OdooClient.read('my.model', ['param'], {
+    await odooClient.authenticate(username, password);
+    odooClient.read('my.model', ['param'], {
       filter1: 'value1',
       filter2: 'value2',
     });
@@ -225,12 +225,12 @@ describe('odoo-client', () => {
 
   test('execute search method', async () => {
     const uid = 1;
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    vi.spyOn(OdooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
+    vi.spyOn(odooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
 
-    await OdooClient.authenticate(username, password);
-    OdooClient.search('my.model', ['param'], {
+    await odooClient.authenticate(username, password);
+    odooClient.search('my.model', ['param'], {
       filter1: 'value1',
       filter2: 'value2',
     });
@@ -268,15 +268,21 @@ describe('odoo-client', () => {
 
   test('execute searchRead method', async () => {
     const uid = 1;
-    const OdooClient = new OdooClient(config);
+    const odooClient = new OdooClient(config);
 
-    vi.spyOn(OdooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
+    vi.spyOn(odooClient, 'common').mockResolvedValueOnce(Promise.resolve(uid));
 
-    await OdooClient.authenticate(username, password);
-    OdooClient.searchRead('my.model', ['param'], {
-      filter1: 'value1',
-      filter2: 'value2',
-    });
+    await odooClient.authenticate(username, password);
+    odooClient.searchRead(
+      'my.model',
+      ['param'],
+      [
+        {
+          filter1: 'value1',
+          filter2: 'value2',
+        },
+      ]
+    );
 
     const expectedData = {
       jsonrpc: '2.0',
