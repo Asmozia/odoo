@@ -5,7 +5,6 @@
   "types": "dist/index.d.ts",
   "main": "dist/index.mjs",
   "module": "dist/index.js",
-  "dependencies": {},
   "publishConfig": {
     "access": "public"
   },
@@ -17,5 +16,8 @@
   "files": [
     "dist",
     "src"
-  ]
+  ],
+  "dependencies": {
+    "@asmozia/jsonrpc-client": "0.16.0"
+  }
 }
