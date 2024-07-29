@@ -15,9 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@asmozia/jsonrpc-client": ["packages/jsonrpc-client/src/index.ts"],
       "@asmozia/odoo-client": ["packages/odoo-client/src/index.ts"],
-      "@asmozia/react-odoo": ["packages/react-odoo/src/index.ts"],
-      "@asmozia/jsonrpc-client": ["packages/jsonrpc-client/src/index.ts"]
+      "@asmozia/react-odoo": ["packages/react-odoo/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

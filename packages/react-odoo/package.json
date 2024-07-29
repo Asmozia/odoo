@@ -1,6 +1,6 @@
 {
   "name": "@asmozia/react-odoo",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "type": "module",
   "types": "dist/index.d.ts",
   "main": "dist/index.mjs",
@@ -18,6 +18,6 @@
     "src"
   ],
   "dependencies": {
-    "@asmozia/odoo-client": "0.15.0"
+    "@asmozia/odoo-client": "0.16.0"
   }
 }
