@@ -1,51 +1,27 @@
-# Odoo API
+# Jsonrpc Client
 
-This is a library for interacting with the Odoo API. It was generated with [Nx](https://nx.dev).
+This is a JSON-RPC client implemented in TypeScript. It provides a simple and efficient way to make JSON-RPC calls.
 
 ## Installation
 
-Use the package manager [npm](https://www.npmjs.com/) to install odoo-client.
+To install the `jsonrpc-client`, run the following command:
 
 ```bash
-npm install odoo-client
+npm install @asmozia/jsonrpc-client
 ```
 
 ## Usage
+Here is a basic example of how to use the jsonrpc-client:
 
-```typescript
-import { OdooClient } from 'odoo-client';
+  ```typescript
+import { JsonRpcClient } from '@asmozia/jsonrpc-client';
 
-const api = new OdooClient();
+const client = new JsonRpcClient('http://localhost:8545');
 
-// Use the api
-api
-  .search('rh.employee', ['name', 'John'], { limit: 10 })
-  .then((users) => console.log(users))
-  .catch((error) => console.error(error));
-```
-
-## Building
-
-Run the following command to build the library:
-
-```bash
-nx build odoo-client
-```
-
-## Running Tests
-
-To execute the unit tests via [Vitest](https://vitest.dev/), run the following command:
-
-```bash
-nx test odoo-client
-```
-
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+client.call('myMethod', [param1, param2])
+  .then(response => console.log(response))
+  .catch(error => console.error(error));
+  ```
 
 ## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
+This project is licensed under the MIT License
