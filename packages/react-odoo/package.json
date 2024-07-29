@@ -18,6 +18,6 @@
     "src"
   ],
   "dependencies": {
-    "@asmozia/odoo-client": "0.16.0"
+    "@asmozia/jsonrpc-client": "0.16.0"
   }
 }

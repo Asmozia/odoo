@@ -1,8 +1,4 @@
-import {
-  JsonrpcClient,
-  JsonrpcConfig,
-  onSend,
-} from './jsonrpc-client/jsonrpcClient';
+import { JsonrpcClient, JsonrpcConfig, onSend } from '@asmozia/jsonrpc-client';
 
 interface OdooClientConfig extends JsonrpcConfig {
   dbName: string;
