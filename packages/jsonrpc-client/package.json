@@ -1,5 +1,5 @@
 {
-  "name": "@asmozia/odoo-client",
+  "name": "@asmozia/jsonrpc-client",
   "version": "0.15.0",
   "type": "module",
   "types": "dist/index.d.ts",
@@ -12,7 +12,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Asmozia/odoo.git",
-    "directory": "packages/odoo-client"
+    "directory": "packages/jsonrpc-client"
   },
   "files": [
     "dist",

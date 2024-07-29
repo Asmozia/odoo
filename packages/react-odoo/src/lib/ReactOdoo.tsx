@@ -1,16 +1,67 @@
-import React, { ReactNode } from 'react';
-import { OdooClient } from '@asmozia/odoo-client';
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { JsonrpcClient, JsonrpcConfig, onSend } from '@asmozia/jsonrpc-client';
 
 export type OdooClientContextProps = {
-  client: OdooClient | undefined;
+  config: OdooClientConfig;
+  profile: {
+    login: string;
+    apiKey: string;
+    uid: number | null;
+  };
+  updateConfig: (config: OdooClientConfig) => any;
+  version: () => Promise<any>;
+  authenticate: (
+    login: string,
+    apiKey: string,
+    persist?: boolean
+  ) => Promise<boolean>;
+  disconnect: () => Promise<boolean>;
+  read: (model: string, args?: any[], options?: object) => Promise<any>;
+  search: (model: string, args?: any[], options?: object) => Promise<any>;
+  searchRead: (
+    model: string,
+    filter?: any[],
+    fields?: any[],
+    options?: { offset: number; limit: number; order: string; context: object }
+  ) => Promise<any>;
+  searchCount: (
+    model: string,
+    filter?: any[],
+    fields?: any[],
+    options?: { offset: number; limit: number; order: string; context: object }
+  ) => Promise<any>;
+  fieldsGet: (model: string, args?: any[], options?: object) => Promise<any>;
+  create: (model: string, args?: any[], options?: object) => Promise<any>;
+  update: (model: string, args?: any[], options?: object) => Promise<any>;
+  remove: (model: string, args?: any[], options?: object) => Promise<any>;
+  isReady: boolean;
 };
 
-export const OdooClientContext = React.createContext<OdooClientContextProps>({
-  client: undefined,
-});
+function defaultFunction() {
+  return Promise.resolve(false);
+}
 
-import { useEffect, useState } from 'react';
-import { JsonrpcClient, JsonrpcConfig, onSend } from '@asmozia/odoo-client';
+export const OdooClientContext = createContext<OdooClientContextProps>({
+  config: { dbName: '' },
+  profile: {
+    login: '',
+    apiKey: '',
+    uid: null,
+  },
+  updateConfig: () => {},
+  version: defaultFunction,
+  authenticate: defaultFunction,
+  disconnect: defaultFunction,
+  read: defaultFunction,
+  search: defaultFunction,
+  searchRead: defaultFunction,
+  searchCount: defaultFunction,
+  fieldsGet: defaultFunction,
+  create: defaultFunction,
+  update: defaultFunction,
+  remove: defaultFunction,
+  isReady: false,
+});
 
 interface OdooClientConfig extends JsonrpcConfig {
   dbName: string;
@@ -25,30 +76,83 @@ enum Service {
   OBJECT = 'object',
 }
 
-function useOdooClient(
-  { dbName, ...config }: OdooClientConfig,
-  onSend?: onSend
-) {
+export type OdooClientProviderProps = {
+  defaultConfig: OdooClientConfig;
+  children?: React.ReactNode;
+  onSend?: onSend;
+};
+
+export function OdooClientProvider({
+  defaultConfig,
+  children,
+  onSend,
+}: OdooClientProviderProps) {
   const [jsonRPCClient, setJsonRPCClient] = useState<JsonrpcClient>();
 
-  const [_dbName, setDbName] = useState<string>(dbName);
-  const [_userLogin, setUserLogin] = useState<string>('');
-  const [_userPassword, setUserPassword] = useState<string>('');
-  const [_userId, setUserId] = useState<number>();
+  const [config, setConfig] = useState<OdooClientConfig>(defaultConfig);
+  const [profile, setProfile] = useState<{
+    login: string;
+    apiKey: string;
+    uid: number | null;
+  }>({
+    login: '',
+    apiKey: '',
+    uid: null,
+  });
+
+  const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
+    const savedHostname = localStorage.getItem('hostname');
+    const savedDbName = localStorage.getItem('dbName');
+    const savedLogin = localStorage.getItem('login');
+    const savedApiKey = localStorage.getItem('apiKey');
+    const savedUId = localStorage.getItem('uid');
+
     const jsonRPCClient = new JsonrpcClient(
       {
         pathname: 'jsonrpc',
-        ...config,
+        ...defaultConfig,
+        hostname: savedHostname || defaultConfig.hostname,
       },
       onSend
     );
 
     setJsonRPCClient(jsonRPCClient);
-  }, []);
+    setConfig({
+      ...defaultConfig,
+      dbName: savedDbName || defaultConfig.dbName,
+      hostname: savedHostname || defaultConfig.hostname,
+    });
+    setProfile({
+      login: savedLogin || '',
+      apiKey: savedApiKey || '',
+      uid: savedUId ? parseInt(savedUId, 10) : null,
+    });
+
+    setIsReady(true);
+  }, [defaultConfig]);
+
+  function updateConfig(newConfig: OdooClientConfig) {
+    const jsonrpcClient = new JsonrpcClient(newConfig);
+    setJsonRPCClient(jsonrpcClient);
+    setConfig(newConfig);
+
+    localStorage.setItem('hostname', newConfig.hostname || '');
+    localStorage.setItem('dbName', newConfig.dbName || '');
+
+    setProfile({
+      ...profile,
+      uid: null,
+    });
+    localStorage.removeItem('uid');
+  }
 
   function common(method: string, ...args: any) {
+    if (!jsonRPCClient) {
+      return Promise.resolve(false);
+    }
+
     return jsonRPCClient?.execute(ApiMethod.CALL, {
       service: Service.COMMON,
       method,
@@ -57,7 +161,11 @@ function useOdooClient(
   }
 
   function object(method: string, ...args: any) {
-    if (!_userId) {
+    if (!jsonRPCClient) {
+      return Promise.resolve(false);
+    }
+
+    if (!profile.uid) {
       throw new Error(
         `This method is protected, you need to be authenticated.`
       );
@@ -66,24 +174,55 @@ function useOdooClient(
     return jsonRPCClient?.execute(ApiMethod.CALL, {
       service: Service.OBJECT,
       method,
-      args: [_dbName, _userId, _userPassword, ...args],
+      args: [config.dbName, profile.uid, profile.apiKey, ...args],
     });
   }
 
-  async function authenticate(user: string, password: string, persist = true) {
+  async function authenticate(login: string, apiKey: string, persist = true) {
     try {
-      const uid = await common('authenticate', dbName, user, password, {});
+      const uid = await common(
+        'authenticate',
+        config.dbName,
+        login,
+        apiKey,
+        {}
+      );
 
       if (uid && persist) {
-        setUserId(uid);
-        setUserLogin(user);
-        setUserPassword(password);
+        localStorage.setItem('login', login);
+        localStorage.setItem('apiKey', apiKey);
+        localStorage.setItem('uid', uid);
+
+        setProfile({
+          login,
+          apiKey,
+          uid,
+        });
       }
 
       return uid;
     } catch (error) {
       console.error(error);
       throw new Error('Authentication failed');
+    }
+  }
+
+  async function disconnect() {
+    try {
+      setProfile({
+        login: '',
+        apiKey: '',
+        uid: null,
+      });
+
+      localStorage.removeItem('login');
+      localStorage.removeItem('apiKey');
+      localStorage.removeItem('uid');
+
+      return true;
+    } catch (error) {
+      console.error('Disconnecting failed', error);
+      return false;
     }
   }
 
@@ -137,35 +276,31 @@ function useOdooClient(
     return execute(model, 'unlink', args, options);
   }
 
-  return {
-    authenticate,
-    version,
-    read,
-    search,
-    searchRead,
-    searchCount,
-    fieldsGet,
-    create,
-    update,
-    remove,
-  };
-}
-
-export type { OdooClientConfig };
-export { useOdooClient };
-
-export type OdooClientProviderProps = {
-  client: OdooClient;
-  children?: React.ReactNode;
-};
-
-export const OdooClientProvider = ({
-  client,
-  children,
-}: OdooClientProviderProps): ReactNode => {
   return (
-    <OdooClientContext.Provider value={{ client }}>
+    <OdooClientContext.Provider
+      value={{
+        config,
+        updateConfig,
+        profile,
+        authenticate,
+        disconnect,
+        version,
+        read,
+        search,
+        searchRead,
+        searchCount,
+        fieldsGet,
+        create,
+        update,
+        remove,
+        isReady,
+      }}
+    >
       {children}
     </OdooClientContext.Provider>
   );
-};
+}
+
+export const useOdooClient = () => useContext(OdooClientContext);
+
+export type { OdooClientConfig };
