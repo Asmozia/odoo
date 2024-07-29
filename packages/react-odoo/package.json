@@ -16,8 +16,5 @@
   "files": [
     "dist",
     "src"
-  ],
-  "dependencies": {
-    "@asmozia/jsonrpc-client": "0.16.0"
-  }
+  ]
 }
