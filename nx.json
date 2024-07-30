@@ -56,7 +56,7 @@
         "unitTestRunner": "vitest"
       },
       "application": {
-        "babel": true,
+        "babel": false,
         "style": "styled-components",
         "linter": "eslint",
         "bundler": "vite"
